@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义样式 */
+.filter-btn {
+  @apply px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors duration-200;
+}
+
+.filter-btn.active {
+  @apply bg-blue-600 text-white border-blue-600 hover:bg-blue-700;
+}
+
+.subscription-card {
+  @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200;
+}
+
+/* 状态指示器样式 */
+.status-expired {
+  @apply border-l-red-500;
+}
+
+.status-today {
+  @apply border-l-red-500;
+}
+
+.status-warning {
+  @apply border-l-yellow-500;
+}
+
+.status-caution {
+  @apply border-l-orange-500;
+}
+
+.status-normal {
+  @apply border-l-green-500;
+}
+
+/* 状态标签样式 */
+.status-badge-expired {
+  @apply bg-red-100 text-red-800 border-red-200;
+}
+
+.status-badge-today {
+  @apply bg-red-100 text-red-800 border-red-200;
+}
+
+.status-badge-warning {
+  @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+}
+
+.status-badge-caution {
+  @apply bg-orange-100 text-orange-800 border-orange-200;
+}
+
+.status-badge-normal {
+  @apply bg-green-100 text-green-800 border-green-200;
+}

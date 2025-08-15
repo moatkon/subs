@@ -1,0 +1,260 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const subscriptions = await getCollection('subscriptions');
+
+// 计算到期状态的函数
+function getExpiryStatus(nextBillingDate: Date) {
+  const now = new Date();
+  const diffTime = nextBillingDate.getTime() - now.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays < 0) {
+    return { status: 'expired', days: Math.abs(diffDays), text: `已过期 ${Math.abs(diffDays)} 天` };
+  } else if (diffDays === 0) {
+    return { status: 'today', days: 0, text: '今天到期' };
+  } else if (diffDays <= 3) {
+    return { status: 'warning', days: diffDays, text: `${diffDays} 天后到期` };
+  } else if (diffDays <= 7) {
+    return { status: 'caution', days: diffDays, text: `${diffDays} 天后到期` };
+  } else {
+    return { status: 'normal', days: diffDays, text: `${diffDays} 天后到期` };
+  }
+}
+
+// 格式化价格
+function formatPrice(price: number, currency: string) {
+  const symbols = {
+    'CNY': '¥',
+    'USD': '$',
+    'EUR': '€'
+  };
+  return `${symbols[currency] || currency} ${price}`;
+}
+
+// 格式化计费周期
+function formatBillingCycle(cycle: string) {
+  const cycles = {
+    'monthly': '月付',
+    'yearly': '年付',
+    'quarterly': '季付',
+    'weekly': '周付'
+  };
+  return cycles[cycle] || cycle;
+}
+
+// 按到期时间排序
+const sortedSubscriptions = subscriptions
+  .map(sub => ({
+    ...sub,
+    expiryStatus: getExpiryStatus(sub.data.nextBillingDate)
+  }))
+  .sort((a, b) => a.data.nextBillingDate.getTime() - b.data.nextBillingDate.getTime());
+---
+
+<Layout title="订阅管理 - 首页">
+  <div class="space-y-6">
+    <!-- 统计概览 -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+              <span class="text-white text-sm font-medium">{subscriptions.length}</span>
+            </div>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-500">总订阅数</p>
+            <p class="text-2xl font-semibold text-gray-900">{subscriptions.length}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+              <span class="text-white text-sm font-medium">
+                {sortedSubscriptions.filter(s => s.expiryStatus.status === 'expired').length}
+              </span>
+            </div>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-500">已过期</p>
+            <p class="text-2xl font-semibold text-red-600">
+              {sortedSubscriptions.filter(s => s.expiryStatus.status === 'expired').length}
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+              <span class="text-white text-sm font-medium">
+                {sortedSubscriptions.filter(s => ['warning', 'today'].includes(s.expiryStatus.status)).length}
+              </span>
+            </div>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-500">即将到期</p>
+            <p class="text-2xl font-semibold text-yellow-600">
+              {sortedSubscriptions.filter(s => ['warning', 'today'].includes(s.expiryStatus.status)).length}
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+              <span class="text-white text-sm font-medium">¥</span>
+            </div>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-500">月度支出</p>
+            <p class="text-2xl font-semibold text-green-600">
+              ¥{subscriptions.reduce((sum, sub) => {
+                const monthlyPrice = sub.data.billingCycle === 'yearly' ? sub.data.price / 12 :
+                                   sub.data.billingCycle === 'quarterly' ? sub.data.price / 3 :
+                                   sub.data.billingCycle === 'weekly' ? sub.data.price * 4 :
+                                   sub.data.price;
+                return sum + (sub.data.currency === 'CNY' ? monthlyPrice : monthlyPrice * 7.2);
+              }, 0).toFixed(0)}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 筛选器 -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex flex-wrap gap-4">
+        <button class="filter-btn active" data-filter="all">
+          全部 ({subscriptions.length})
+        </button>
+        <button class="filter-btn" data-filter="expired">
+          已过期 ({sortedSubscriptions.filter(s => s.expiryStatus.status === 'expired').length})
+        </button>
+        <button class="filter-btn" data-filter="warning">
+          即将到期 ({sortedSubscriptions.filter(s => ['warning', 'today'].includes(s.expiryStatus.status)).length})
+        </button>
+        <button class="filter-btn" data-filter="normal">
+          正常 ({sortedSubscriptions.filter(s => s.expiryStatus.status === 'normal').length})
+        </button>
+      </div>
+    </div>
+
+    <!-- 订阅列表 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="subscriptions-grid">
+      {sortedSubscriptions.map((subscription) => {
+        const { data } = subscription;
+        const status = subscription.expiryStatus;
+        
+        return (
+          <div class={`subscription-card border-l-4 status-${status.status}`} data-status={status.status}>
+            <div class="p-6">
+              <div class="flex items-start justify-between">
+                <div class="flex-1">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-1">
+                    {data.title}
+                  </h3>
+                  <p class="text-sm text-gray-600 mb-2">{data.service}</p>
+                  <p class="text-sm text-gray-500 mb-4">{data.description}</p>
+                </div>
+                <div class={`px-2 py-1 rounded-full text-xs font-medium border status-badge-${status.status}`}>
+                  {status.text}
+                </div>
+              </div>
+              
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-500">价格:</span>
+                  <span class="text-sm font-medium text-gray-900">
+                    {formatPrice(data.price, data.currency)} / {formatBillingCycle(data.billingCycle)}
+                  </span>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-500">下次扣费:</span>
+                  <span class="text-sm font-medium text-gray-900">
+                    {data.nextBillingDate.toLocaleDateString('zh-CN')}
+                  </span>
+                </div>
+                
+                {data.category && (
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-500">分类:</span>
+                    <span class="text-sm font-medium text-gray-900">{data.category}</span>
+                  </div>
+                )}
+                
+                {data.tags && data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-1 mt-3">
+                    {data.tags.map(tag => (
+                      <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {data.website && (
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                  <a 
+                    href={data.website} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  >
+                    访问官网 →
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <script>
+    // 筛选功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const subscriptionCards = document.querySelectorAll('.subscription-card');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function(this: HTMLElement) {
+          // 更新按钮状态
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+
+          const filter = this.dataset.filter;
+
+          // 筛选卡片
+          subscriptionCards.forEach(card => {
+            const htmlCard = card as HTMLElement;
+            const status = htmlCard.dataset.status;
+
+            if (filter === 'all') {
+              htmlCard.style.display = 'block';
+            } else if (filter === 'expired' && status === 'expired') {
+              htmlCard.style.display = 'block';
+            } else if (filter === 'warning' && (status === 'warning' || status === 'today')) {
+              htmlCard.style.display = 'block';
+            } else if (filter === 'normal' && (status === 'normal' || status === 'caution')) {
+              htmlCard.style.display = 'block';
+            } else {
+              htmlCard.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</Layout>

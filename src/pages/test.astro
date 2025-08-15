@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="样式测试页面">
+  <div class="max-w-4xl mx-auto p-8">
+    <h1 class="text-4xl font-bold text-blue-600 mb-8">Tailwind CSS 测试</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-l-red-500">
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">已过期</h3>
+        <p class="text-sm text-gray-600">这是一个已过期的订阅服务</p>
+        <div class="mt-4">
+          <span class="px-2 py-1 bg-red-100 text-red-800 border border-red-200 rounded-full text-xs font-medium">
+            已过期 5 天
+          </span>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-l-yellow-500">
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">即将到期</h3>
+        <p class="text-sm text-gray-600">这是一个即将到期的订阅服务</p>
+        <div class="mt-4">
+          <span class="px-2 py-1 bg-yellow-100 text-yellow-800 border border-yellow-200 rounded-full text-xs font-medium">
+            2 天后到期
+          </span>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-l-green-500">
+        <h3 class="text-lg font-semibold text-gray-900 mb-2">正常</h3>
+        <p class="text-sm text-gray-600">这是一个正常的订阅服务</p>
+        <div class="mt-4">
+          <span class="px-2 py-1 bg-green-100 text-green-800 border border-green-200 rounded-full text-xs font-medium">
+            30 天后到期
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow p-6 mb-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">按钮测试</h2>
+      <div class="flex flex-wrap gap-4">
+        <button class="filter-btn active">全部 (5)</button>
+        <button class="filter-btn">已过期 (1)</button>
+        <button class="filter-btn">即将到期 (2)</button>
+        <button class="filter-btn">正常 (2)</button>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg p-6">
+      <h2 class="text-2xl font-bold mb-2">渐变背景测试</h2>
+      <p class="text-blue-100">如果你能看到这个渐变背景和样式，说明 Tailwind CSS 正在正常工作！</p>
+    </div>
+  </div>
+</Layout>
