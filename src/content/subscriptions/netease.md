@@ -1,8 +1,8 @@
 ---
 title: 网易云音乐
 service: 音乐
-price: 19.99
-currency: USD
+price: 88
+currency: CNY
 billingCycle: yearly
 nextBillingDate: 2026-08-10
 category: 音乐
