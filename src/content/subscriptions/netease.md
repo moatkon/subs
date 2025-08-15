@@ -1,15 +1,15 @@
 ---
-title: Google One
-service: Google
+title: 网易云音乐
+service: 音乐
 price: 19.99
 currency: USD
 billingCycle: yearly
-nextBillingDate: 2025-09-19
-category: Google
-description: Google One
-website: https://myaccount.google.com/subscriptions
+nextBillingDate: 2026-08-10
+category: 音乐
+description: 音乐
+website: https://music.163.com/
 isActive: true
-tags: ["Google One"]
+tags: ["音乐"]
 notes: ""
 ---
 <!-- 
