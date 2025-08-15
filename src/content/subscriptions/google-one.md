@@ -1,7 +1,7 @@
 ---
 title: Google One
 service: Google
-price: 10.44
+price: 19.99
 currency: USD
 billingCycle: yearly
 nextBillingDate: 2025-09-19
