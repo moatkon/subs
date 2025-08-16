@@ -163,7 +163,7 @@ const stats = {
     </div>
 
     <!-- 筛选器 -->
-    <div class="glass-container p-8">
+    {/* <div class="glass-container p-8">
       <div class="flex flex-col sm:flex-row items-center justify-between mb-6">
         <h3 class="text-xl font-semibold gradient-text mb-4 sm:mb-0">订阅服务</h3>
         <div class="flex items-center space-x-2">
@@ -200,7 +200,7 @@ const stats = {
           </span>
         </button>
       </div>
-    </div>
+    </div> */}
 
     <!-- 订阅列表 -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="subscriptions-grid">
@@ -227,24 +227,28 @@ const stats = {
                     </h3>
                     <p class="text-sm text-gray-600 font-medium">{data.service}</p>
                   </div>
-                  <div class="flex-1 min-w-0">
-                    <!-- 状态指示器 -->
-                    <div class={`status-badge-${status.status} flex items-center space-x-2 px-3 py-2 rounded-xl shadow-lg backdrop-blur-sm`}>
-                        <div class={`w-2 h-2 rounded-full animate-pulse ${
-                          status.status === 'expired' ? 'bg-red-500' :
-                          status.status === 'today' ? 'bg-red-500' :
-                          status.status === 'warning' ? 'bg-yellow-400' :
-                          status.status === 'caution' ? 'bg-orange-400' :
-                          'bg-green-400'
-                        }`} style={`box-shadow: 0 0 8px ${
-                          status.status === 'expired' ? 'rgba(239, 68, 68, 0.6)' :
-                          status.status === 'today' ? 'rgba(239, 68, 68, 0.6)' :
-                          status.status === 'warning' ? 'rgba(251, 191, 36, 0.6)' :
-                          status.status === 'caution' ? 'rgba(251, 146, 60, 0.6)' :
-                          'rgba(52, 211, 153, 0.6)'
-                        }`}></div>
-                        <span class="text-xs font-semibold tracking-wide">{status.text}</span>
-                      </div>
+                </div>
+              </div>
+
+              <!-- 状态指示器 -->
+              <div class="mb-6">
+                <div class="flex items-start space-x-4">
+                  <div class={`status-badge-${status.status} flex items-center space-x-2 px-3 py-2 rounded-xl shadow-lg backdrop-blur-sm`}>
+                      <div class={`w-2 h-2 rounded-full animate-pulse ${
+                        status.status === 'expired' ? 'bg-red-500' :
+                        status.status === 'today' ? 'bg-red-500' :
+                        status.status === 'warning' ? 'bg-yellow-400' :
+                        status.status === 'caution' ? 'bg-orange-400' :
+                        'bg-green-400'
+                      }`} style={`box-shadow: 0 0 8px ${
+                        status.status === 'expired' ? 'rgba(239, 68, 68, 0.6)' :
+                        status.status === 'today' ? 'rgba(239, 68, 68, 0.6)' :
+                        status.status === 'warning' ? 'rgba(251, 191, 36, 0.6)' :
+                        status.status === 'caution' ? 'rgba(251, 146, 60, 0.6)' :
+                        'rgba(52, 211, 153, 0.6)'
+                      }`}></div>
+                      <span class="text-xs font-semibold tracking-wide">{status.text}</span>
+                    </div>
                   </div>
                 </div>
               </div>
