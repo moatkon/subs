@@ -1,6 +1,6 @@
 ---
 title: moatkon.com域名
-service: 域名
+service: 域名服务
 price: 10.44
 currency: USD
 billingCycle: yearly

@@ -1,6 +1,6 @@
 ---
 title: 网易云音乐
-service: 音乐
+service: 音乐服务
 price: 88
 currency: CNY
 billingCycle: yearly

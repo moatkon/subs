@@ -1,6 +1,6 @@
 ---
 title: Google One
-service: Google
+service: Google服务
 price: 19.99
 currency: USD
 billingCycle: yearly
