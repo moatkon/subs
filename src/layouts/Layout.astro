@@ -12,37 +12,119 @@ const { title } = Astro.props;
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="订阅服务管理系统" />
+    <meta name="description" content="优雅的订阅服务管理平台，让您的数字生活井井有条" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <title>{title}</title>
   </head>
-  <body class="bg-gray-50 min-h-screen">
-    <header class="bg-white shadow-sm border-b">
+  <body class="min-h-screen liquid-bg">
+    <!-- 背景装饰元素 -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-liquid-primary/20 to-liquid-secondary/20 rounded-full blur-3xl animate-blob"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-liquid-accent/20 to-liquid-pink/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-liquid-blue/10 to-liquid-cyan/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <header class="fixed top-0 left-0 right-0 z-50 nav-glass">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center py-6">
-          <div class="flex items-center">
-            <h1 class="text-2xl font-bold text-gray-900">Moatkon's Sub</h1>
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-liquid-primary to-liquid-secondary rounded-xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-xl font-bold gradient-text">Moatkon's Sub</h1>
+              <p class="text-xs text-gray-600">订阅管理平台</p>
+            </div>
           </div>
-          <div class="flex items-center space-x-4">
-            <span class="text-sm text-gray-500">记录订阅的服务</span>
+          <div class="flex items-center space-x-6">
+            <nav class="hidden md:flex items-center space-x-6">
+              <a href="#" class="text-gray-700 hover:text-liquid-primary transition-colors duration-200 font-medium">首页</a>
+              <a href="#" class="text-gray-700 hover:text-liquid-primary transition-colors duration-200 font-medium">统计</a>
+              <a href="#" class="text-gray-700 hover:text-liquid-primary transition-colors duration-200 font-medium">设置</a>
+            </nav>
+            <button class="liquid-btn text-sm">
+              <span>添加订阅</span>
+            </button>
           </div>
         </div>
       </div>
     </header>
-    
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <slot />
+
+    <!-- 主要内容区域 -->
+    <main class="pt-24 pb-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 页面标题区域 -->
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4 floating-element">
+            管理您的数字订阅
+          </h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto floating-element-delayed">
+            优雅地追踪和管理您的所有订阅服务，让数字生活更加井井有条
+          </p>
+        </div>
+
+        <slot />
+      </div>
     </main>
-    
-    <footer class="bg-white border-t mt-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <p class="text-center text-gray-500 text-sm">
-          订阅井井有条 · <a href="https://github.com/moatkon/subs" target="_blank">开源</a>
-        </p>
-        <p class="text-center text-gray-500 text-sm">
-          
-        </p>
+
+    <!-- 页脚 -->
+    <footer class="relative">
+      <div class="glass-container mx-4 sm:mx-6 lg:mx-8 mb-8">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center md:text-left">
+              <div class="flex items-center justify-center md:justify-start space-x-3 mb-4">
+                <div class="w-8 h-8 bg-gradient-to-br from-liquid-primary to-liquid-secondary rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <span class="font-bold gradient-text">Moatkon's Sub</span>
+              </div>
+              <p class="text-gray-600 text-sm">
+                让订阅管理变得简单而优雅
+              </p>
+            </div>
+
+            <div class="text-center">
+              <h3 class="font-semibold text-gray-800 mb-4">功能特色</h3>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li>智能到期提醒</li>
+                <li>费用统计分析</li>
+                <li>分类标签管理</li>
+                <li>数据安全保护</li>
+              </ul>
+            </div>
+
+            <div class="text-center md:text-right">
+              <h3 class="font-semibold text-gray-800 mb-4">开源项目</h3>
+              <a
+                href="https://github.com/moatkon/subs"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center space-x-2 text-liquid-primary hover:text-liquid-secondary transition-colors duration-200"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="border-t border-white/20 mt-8 pt-8 text-center">
+            <p class="text-gray-600 text-sm">
+              © 2024 Moatkon's Sub. 用心打造的订阅管理工具
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   </body>
