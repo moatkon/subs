@@ -6,6 +6,6 @@ export default defineConfig({
   integrations: [
     tailwind()
   ],
-  site: 'https://example.com',
+  site: 'https://subs.moatkon.com',
   base: '/',
 });
