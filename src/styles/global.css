@@ -76,25 +76,56 @@
     @apply border-l-4 border-green-500;
   }
 
-  /* 状态标签 - 玻璃态 */
+  /* 状态标签 - 现代化样式 */
   .status-badge-expired {
-    @apply bg-red-100 text-red-800 border border-red-200 rounded-full px-3 py-1 text-xs font-medium;
+    @apply bg-gradient-to-r from-red-500 to-red-600 text-white border-0 shadow-red-500/25;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   }
 
   .status-badge-today {
-    @apply bg-red-100 text-red-800 border border-red-200 rounded-full px-3 py-1 text-xs font-medium;
+    @apply bg-gradient-to-r from-red-500 to-red-600 text-white border-0 shadow-red-500/25;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   }
 
   .status-badge-warning {
-    @apply bg-yellow-100 text-yellow-800 border border-yellow-200 rounded-full px-3 py-1 text-xs font-medium;
+    @apply bg-gradient-to-r from-amber-400 to-orange-500 text-white border-0 shadow-amber-500/25;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
   }
 
   .status-badge-caution {
-    @apply bg-orange-100 text-orange-800 border border-orange-200 rounded-full px-3 py-1 text-xs font-medium;
+    @apply bg-gradient-to-r from-orange-400 to-orange-600 text-white border-0 shadow-orange-500/25;
+    background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
   }
 
   .status-badge-normal {
-    @apply bg-green-100 text-green-800 border border-green-200 rounded-full px-3 py-1 text-xs font-medium;
+    @apply bg-gradient-to-r from-emerald-400 to-green-600 text-white border-0 shadow-emerald-500/25;
+    background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  }
+
+  /* 状态指示点颜色 */
+  .status-dot-expired {
+    @apply bg-red-500;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+  }
+
+  .status-dot-today {
+    @apply bg-red-500;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+  }
+
+  .status-dot-warning {
+    @apply bg-yellow-400;
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+  }
+
+  .status-dot-caution {
+    @apply bg-orange-400;
+    box-shadow: 0 0 8px rgba(251, 146, 60, 0.6);
+  }
+
+  .status-dot-normal {
+    @apply bg-green-400;
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
   }
 
   /* 统计卡片 */

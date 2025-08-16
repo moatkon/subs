@@ -212,10 +212,22 @@ const stats = {
           <div class={`subscription-card status-${status.status} group`} data-status={status.status}>
             <div class="relative">
               <!-- 状态指示器 -->
-              <div class="absolute -top-2 -right-2 z-10">
-                <div class={`status-badge-${status.status} flex items-center space-x-1`}>
-                  <span class="text-sm">{status.icon}</span>
-                  <span>{status.text}</span>
+              <div class="absolute -top-3 -right-3 z-10">
+                <div class={`status-badge-${status.status} flex items-center space-x-2 px-3 py-2 rounded-xl shadow-lg backdrop-blur-sm`}>
+                  <div class={`w-2 h-2 rounded-full animate-pulse ${
+                    status.status === 'expired' ? 'bg-red-500' :
+                    status.status === 'today' ? 'bg-red-500' :
+                    status.status === 'warning' ? 'bg-yellow-400' :
+                    status.status === 'caution' ? 'bg-orange-400' :
+                    'bg-green-400'
+                  }`} style={`box-shadow: 0 0 8px ${
+                    status.status === 'expired' ? 'rgba(239, 68, 68, 0.6)' :
+                    status.status === 'today' ? 'rgba(239, 68, 68, 0.6)' :
+                    status.status === 'warning' ? 'rgba(251, 191, 36, 0.6)' :
+                    status.status === 'caution' ? 'rgba(251, 146, 60, 0.6)' :
+                    'rgba(52, 211, 153, 0.6)'
+                  }`}></div>
+                  <span class="text-xs font-semibold tracking-wide">{status.text}</span>
                 </div>
               </div>
 
