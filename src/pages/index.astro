@@ -162,46 +162,6 @@ const stats = {
       </div>
     </div>
 
-    <!-- 筛选器 -->
-    {/* <div class="glass-container p-8">
-      <div class="flex flex-col sm:flex-row items-center justify-between mb-6">
-        <h3 class="text-xl font-semibold gradient-text mb-4 sm:mb-0">订阅服务</h3>
-        <div class="flex items-center space-x-2">
-          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-          </svg>
-          <span class="text-sm text-gray-600">筛选条件</span>
-        </div>
-      </div>
-
-      <div class="flex flex-wrap gap-3">
-        <button class="filter-btn active" data-filter="all">
-          <span class="flex items-center space-x-2">
-            <span>📋</span>
-            <span>全部 ({stats.total})</span>
-          </span>
-        </button>
-        <button class="filter-btn" data-filter="expired">
-          <span class="flex items-center space-x-2">
-            <span>⚠️</span>
-            <span>已过期 ({stats.expired})</span>
-          </span>
-        </button>
-        <button class="filter-btn" data-filter="warning">
-          <span class="flex items-center space-x-2">
-            <span>⏰</span>
-            <span>即将到期 ({stats.warning})</span>
-          </span>
-        </button>
-        <button class="filter-btn" data-filter="normal">
-          <span class="flex items-center space-x-2">
-            <span>✅</span>
-            <span>正常 ({stats.normal})</span>
-          </span>
-        </button>
-      </div>
-    </div> */}
-
     <!-- 订阅列表 -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="subscriptions-grid">
       {sortedSubscriptions.map((subscription) => {
