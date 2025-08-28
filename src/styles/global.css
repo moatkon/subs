@@ -41,6 +41,19 @@
     transform: translateY(-1px);
   }
 
+  .liquid-btn-warning {
+  @apply px-6 py-3 rounded-full font-medium text-white 
+         bg-gradient-to-r from-orange-500 to-red-500 
+         hover:from-orange-600 hover:to-red-600 
+         shadow-lg hover:shadow-xl 
+         transition-all duration-300;
+  }
+
+  .liquid-btn-warning:hover {
+    transform: translateY(-1px);
+  }
+
+
   /* 筛选按钮 */
   .filter-btn {
     @apply px-4 py-2 rounded-full bg-white/30 backdrop-blur-sm border border-white/40 text-gray-700 font-medium transition-all duration-300 hover:bg-white/40;
