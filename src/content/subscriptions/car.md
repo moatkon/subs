@@ -1,6 +1,6 @@
 ---
 title: 租车位
-service: 租车位
+service: 租赁
 price: 2400
 currency: CNY
 billingCycle: yearly
