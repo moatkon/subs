@@ -1,10 +1,10 @@
 ---
 title: VPN
 service: VPN
-price: 80
+price: 150
 currency: CNY
 billingCycle: quarterly
-nextBillingDate: 2025-10-16
+nextBillingDate: 2026-04-16
 category: VPN
 # description: 音乐
 website: https://dash.lineasia.top/#/register?code=MSHllfkp
