@@ -46,6 +46,7 @@ const subscriptions = await getCollection('subscriptions');
       const cycles = {
         'monthly': '月付',
         'yearly': '年付',
+        'half-yearly': '半年付',
         'quarterly': '季付',
         'weekly': '周付'
       };
@@ -265,6 +266,7 @@ const subscriptions = await getCollection('subscriptions');
         normal: sortedSubscriptions.filter(s => s.expiryStatus.status === 'normal' || s.expiryStatus.status === 'caution').length,
         monthlyTotal: subscriptions.reduce((sum, sub) => {
           const monthlyPrice = sub.data.billingCycle === 'yearly' ? sub.data.price / 12 :
+                             sub.data.billingCycle === 'half-yearly' ? sub.data.price / 6 :
                              sub.data.billingCycle === 'quarterly' ? sub.data.price / 3 :
                              sub.data.billingCycle === 'weekly' ? sub.data.price * 4 :
                              sub.data.price;

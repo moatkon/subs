@@ -7,14 +7,11 @@ const subscriptionsCollection = defineCollection({
     service: z.string(),
     price: z.number(),
     currency: z.string().default('CNY'),
-    billingCycle: z.enum(['monthly', 'yearly', 'quarterly', 'weekly']),
+    billingCycle: z.enum(['monthly', 'yearly', 'quarterly', 'weekly','half-yearly']),
     nextBillingDate: z.date(),
     category: z.string().optional(),
-    // description: z.string().optional(),
     website: z.string().url().optional(),
-    isActive: z.boolean().default(true),
-    // tags: z.array(z.string()).optional(),
-    // notes: z.string().optional(),
+    isActive: z.boolean().default(true)
   }),
 });
 
